@@ -18,40 +18,38 @@ function App() {
     "https://feelstory.com/gnu/nori/img/3_on.png",
   ];
 
-
-
   const [myPick, setMyPick] = useState(null);
   const [comPick, setComPick] = useState(null);
-  const [myResult, setMyResult] = useState('?');
-  const [comResult, setComResult] = useState('?');
-
+  const [myResult, setMyResult] = useState("?");
+  const [comResult, setComResult] = useState("?");
 
   const 승부결정 = () => {
-
     const 승부결정도우미 = [0, 1, 2, 0];
 
     if (myPick === comPick) {
-      setMyResult('Tie')
-      setComResult('Tie')
-    }else{
-      if(승부결정도우미[myPick+1]===comPick){
-        setMyResult('Lose')
-        setComResult('Win')
-      }else{
-        setMyResult('Win')
-        setComResult('Lose')
+      setMyResult("Tie");
+      setComResult("Tie");
+    } else {
+      if (승부결정도우미[myPick + 1] === comPick) {
+        setMyResult("Lose");
+        setComResult("Win");
+      } else {
+        setMyResult("Win");
+        setComResult("Lose");
       }
     }
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     console.log("나", myPick);
     console.log("컴", comPick);
-    if(myPick){
+
+    if (myPick===null) {
+      return
+    }else{
       승부결정()
     }
-  },[myPick, comPick])
+  }, [myPick, comPick]);
 
   return (
     <div className="App" style={{ padding: 20 }}>
@@ -75,7 +73,6 @@ function App() {
                 setMyPick(i);
                 // 컴퓨터 랜덤 픽 저장
                 setComPick(Math.floor((Math.random() * 10) % 3));
-                승부결정()
               }}
             >
               <Button img={e} key={i} />
